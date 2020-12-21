@@ -1,0 +1,93 @@
+using System.Data.SQLite;
+class Program
+{
+  static void Main(string[] args)
+  {
+    sting strConn = @"Data Source=C:\DB 경로";
+    
+    using (SQLiteConnection conn = new SQLiteConnectin(strConn))
+    {
+      conn.Open();
+      string sql = "sql command";
+      SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+      cmd.ExecuteNonQuery();
+            
+    } 
+  }
+}
+
+
+// SQLite Data read
+
+private static void Select_Reader()
+{
+  string connStr = @"Data Source=C:\DB 경로";
+
+  using (var conn = new SQLiteConnection(connstr))
+  {
+    conn.Open();
+    string sql = "SELECT * FROM 테이블명 WHERE 조건명"
+    
+    //SQLiteDataReader를 이용하여 연결 모드로 데이터 읽기 : 한 레코드씩 읽어오기
+    SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+    SQLiteDataReader rdr = cmd.ExecuteReader();
+    while (rdr.Read())
+    {
+      Console.WriteLine(rdr["name"]);
+    }
+    rdr.Close();    
+  }
+}
+
+
+private static Dataset Select_Adapter()
+{
+  DataSet ds = new DataSet();
+  string connStr = @"Data Source=C:DB 경로";
+  
+  //SQLiteDataAdapter 클래스를 이용 비연결 모드로 데이터 읽기
+  string sql = "SELECT * FROM 테이블명";
+  vat adpt = new SQLiteDataAdapter(sql, connStr);
+  adpt.Fill(ds);
+  
+  return ds;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
