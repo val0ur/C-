@@ -2,7 +2,7 @@
 
 ## anti forensics 이벤트가 발생했을 때 (Windows Event log code : 1100) 해당 시점 10분 전 후로 timline 항목과 installed program, 검색기록을 보여준다. 
 
-### timeline은 
+### timeline은 opensource api를 활용한다. 
 - timeline의 경우에는 해당 시간대에 일어난 일련의 전반적인 행위들을 보여줌으로써 수사관이 추적할 방향성을 제시해준다. 
 
 ### installed_program과 search terms는 .txt.로 입력받아서 wordcloud2 패키지 이용해서 이미지로 보여주고 
