@@ -35,4 +35,7 @@ https://bety.tistory.com/12
   Console.WriteLine("R Done!!");
 
 
+[R] 영단어 데이터 전처리 및 빈도수 Top 20개 나열 
+---
+
 
