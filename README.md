@@ -38,8 +38,7 @@ https://bety.tistory.com/12
 [R] 영단어 데이터 전처리 및 빈도수 Top 20개 나열 
 ---
 
-#### [text_top20.R](https://github.com/val0ur/Csharp/blob/main/text_top20.R
-)
+#### [text_top20.R](https://github.com/val0ur/Csharp/blob/main/text_top20.R)
 
 https://pannacotta.tistory.com/51 [Shimmering Green]
 
