@@ -39,6 +39,7 @@ https://bety.tistory.com/12
 ---
 
 #### text_top20.R
+https://github.com/val0ur/Csharp/blob/main/text_top20.R
 
 https://pannacotta.tistory.com/51 [Shimmering Green]
 
