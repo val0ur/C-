@@ -42,3 +42,10 @@ https://bety.tistory.com/12
 
 출처 : https://pannacotta.tistory.com/51 [Shimmering Green]
 
+
+[R] txt, csv 등 파일 읽어오기 
+---
+
+#### [txt,csv 읽어오기](https://m.blog.naver.com/PostView.nhn?blogId=liberty264&logNo=221088054580&proxyReferer=https:%2F%2Fwww.google.com%2F)
+
+
