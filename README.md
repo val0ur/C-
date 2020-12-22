@@ -49,3 +49,7 @@ https://bety.tistory.com/12
 #### [txt,csv 읽어오기](https://m.blog.naver.com/PostView.nhn?blogId=liberty264&logNo=221088054580&proxyReferer=https:%2F%2Fwww.google.com%2F)
 
 
+[R] 그래프 그리기
+---
+https://m.blog.naver.com/PostView.nhn?blogId=hwan0447&logNo=221326523866&proxyReferer=https:%2F%2Fwww.google.com%2F
+
