@@ -1,0 +1,15 @@
+timeline
+
+installed program
+
+search term
+
++- 30분씩 총 60분으로 TimeLine 구성 
+
+1분을 한칸으로 
+
+ex)
+	time	| task
+-----------------------------------
+2020-10-07 14:12 	| chrome
+
