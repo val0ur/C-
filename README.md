@@ -14,6 +14,10 @@
 C#에서 R 실행하기 
 --
 
+### 준비과정
+https://bety.tistory.com/12
+
+
 1. Process로 직접 R.Test.R 실행시키기
 
   string RScriptPath = @"C:\Program Files\...\Rscript.exe";
