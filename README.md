@@ -39,3 +39,31 @@ https://bety.tistory.com/12
 ---
 
 
+install.packages("tm")
+library(tm)
+
+sample <- scan("text.txt", what = "character")
+source <- VectorSource(sample)
+
+corpus <- Corpus(source)
+corpus <- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, stripWhitespace)
+corpus <- tm_map(corpus, removeWords, stopwords("english")
+corpus <- tm_map(corpus, removeWords, c("dont", "can","what", "cant"))
+corpus <- tm_map(corpus, PlainTextDocument)
+
+dtm <- DocumentTermMatrix(corpus)
+dtm2 <- as.matrix(dtm)
+frequency <- colSums(dtm2)
+frequency <- sort(frequency, decreasing=T)
+head(frequency)
+
+sink("text_top20.txt")
+frequency[1:20]
+sink()
+
+barplot(frequency[1:20], las =3)
+
+
+
