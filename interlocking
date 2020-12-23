@@ -1,3 +1,4 @@
+
 # Timeline graphic using R and ggplot2
 
 #install.packages("ggplot2")
@@ -9,7 +10,7 @@ library(scales)
 library(lubridate)
 
 # input csv | change file name what you want to read
-df1 <- read.csv('C:/Users/305/Desktop/R/csv/3_installedprogram.csv', encoding = 'UTF-8')
+df1 <- read.csv('C:/Users/305/Desktop/R/csv2/3_installedprogram.csv', encoding = 'UTF-8')
 df1
 
 # add status column for coloring each event | change status ex(timeline, install_program, search_terms)
@@ -17,8 +18,8 @@ df1$status <- "installed_program"
 df1 <- df1[with(df1, order(time)), ]   # could be different for each csv 
 head(df1, 20)
 
-
-df2 <- read.csv('C:/Users/305/Desktop/R/csv/3_searchtemrs.csv', encoding = 'UTF-8')
+# input csv | change file name what you want to read
+df2 <- read.csv('C:/Users/305/Desktop/R/csv2/3_serachterms.csv', encoding = 'UTF-8')
 df2
 
 # add status column for coloring each event | change status ex(timeline, install_program, search_terms)
@@ -26,11 +27,20 @@ df2$status <- "search_terms"
 df2 <- df2[with(df2, order(time)), ]   # could be different for each csv 
 head(df2, 20)
 
+# input csv | change file name what you want to read
+df3 <- read.csv('C:/Users/305/Desktop/R/csv2/3_timeline.csv', encoding = 'UTF-8')
+df3
+
+# add status column for coloring each event | change status ex(timeline, install_program, search_terms)
+df3$status <- "timeline"
+df3 <- df3[with(df3, order(time)), ]   # could be different for each csv 
+head(df3, 20)
+
 
 # gather 2 DF into 1 DF | df1 + df2 => df
 
-df <- rbind(df1, df2)
-
+df <- rbind(df1, df2, df3)
+df
 
 # add anti_time row for BOOM | INPUT the anti_forensic_time as "YYYY-MM-DDThh:mm" form
 df[nrow(df)+1, ] <- c(99,"2020-10-06T01:41","BOOM","BOOM")
@@ -102,7 +112,7 @@ print(timeline_plot)
 
 # Plot Title name
 timeline_plot <- timeline_plot + ggtitle("Timeline for Aniforensic Event +- 30 min")    # title 명칭을 입력합니다.
-timeline_plot <- timeline_plot + theme(plot.title = element_text(family = "sans-serif", face = "bold", hjust = 0.5, size = 15, color = "darkblue"))
+timeline_plot <- timeline_plot + theme(plot.title = element_text( face = "bold", hjust = 0.5, size = 15, color = "darkblue"))
 
 print(timeline_plot)
 
@@ -113,7 +123,7 @@ timeline_plot <- timeline_plot + geom_segment(data=df[df$time_count == 1,], aes(
 print(timeline_plot)
 
 # Plot scatter points at zero and date
-timeline_plot<- timeline_plot + geom_point(aes(y=0), size =3)           # use point 
+timeline_plot<- timeline_plot + geom_point(aes(y=0), size =4)           # use point 
 
 
 
@@ -123,7 +133,7 @@ timeline_plot <- timeline_plot + theme(axis.line.y=element_blank(),
                                        axis.title.x=element_blank(),
                                        axis.title.y=element_blank(),
                                        axis.ticks.y=element_blank(),
-                                       #axis.text.x=element_blank(),
+                                       axis.text.x=element_text(angle=30),
                                        axis.ticks.x=element_blank(),
                                        axis.line.x=element_blank(),
                                        legend.position = "bottom"
@@ -133,6 +143,5 @@ print(timeline_plot)
 
 # Show text for each milestone | font size 
 timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=2.5)
-
 
 print(timeline_plot)
