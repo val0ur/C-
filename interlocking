@@ -17,8 +17,11 @@ library(timevis)
 df <- read.csv('C:/R-4.0.3/projects/Timeline_Visualization/csv/3_installedprogram.csv', encoding = 'UTF-8')
 df
 
-# add anti_time column for BOOM 
-df$anti_time <- "2020-10-06 11:11"
+# count the # of csv's row
+nrow(df)
+
+# add anti_time row for BOOM 
+df[nrow(df),] <- c(99,"2020-10-06T01:41",BOOM)
 df <- df <- df[with(df, order(time)), ]
 head(df, 20)
 
@@ -28,8 +31,8 @@ df <- df[with(df, order(time)), ] 	# could be different for each csv
 head(df, 20)
 
 # define colors for each event 
-status_levels <- c("timeline", "installed_program", "search_terms")
-status_colors <- c("#0070C0", "#00B050", "#C00000")
+status_levels <- c("timeline", "installed_program", "search_terms", "BOOM")
+status_colors <- c("#0070C0", "#00B050","FFC000", "#C00000" )
 
 df$status <- factor(df$status, levels=status_levels, ordered=TRUE)
 
@@ -113,8 +116,7 @@ timeline_plot <- timeline_plot + geom_segment(data=df[df$time_count == 1,], aes(
                                               color = 'black', size=0.2)
 
 # Plot the center antiforensic event time
-timeline_plot <- timeline_plot + geom_segment(data=df$anti_time, aes(y=position, yend=0, xend=anti_time,
-                                              color = 'black', size=0.2)
+
 
 # Plot scatter points at zero and date
 timeline_plot<- timeline_plot + geom_point(aes(y=0), size =3)           # use point 
@@ -144,25 +146,6 @@ timeline_plot <- timeline_plot + geom_text(data=hour_df,
                                            vjust=0.5, 
                                            color ='black',
                                            angle=90)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
