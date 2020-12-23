@@ -119,7 +119,7 @@ timeline_plot <- timeline_plot + theme(axis.line.y=element_blank(),
 print(timeline_plot)
 
 # Show text for each milestone | font size 
-timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=3.5)
+timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=2.5)
 
 
 print(timeline_plot)
