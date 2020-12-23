@@ -100,7 +100,7 @@ timeline_plot <- timeline_plot + geom_segment(data=df[df$time_count == 1,], aes(
 print(timeline_plot)
 
 # Plot scatter points at zero and date
-timeline_plot<- timeline_plot + geom_point(aes(y=0), size =3)           # use point 
+timeline_plot<- timeline_plot + geom_point(aes(y=0), size =4)           # use point 
 
 
 
