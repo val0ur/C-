@@ -1,3 +1,4 @@
+
 # Timeline graphic using R and ggplot2
 
 #install.packages("ggplot2")
@@ -8,31 +9,26 @@ library(ggplot2)
 library(scales)
 library(lubridate)
 
-# ++++
-library(tidyverse)
-library(knitr)
-library(timevis)
-
 # input 3_ installedprogram.csv | change file name what you want to read
-df <- read.csv('C:/R-4.0.3/projects/Timeline_Visualization/csv/3_installedprogram.csv', encoding = 'UTF-8')
+df <- read.csv('C:/Users/305/Desktop/R/csv/3_installedprogram.csv', encoding = 'UTF-8')
 df
 
-# count the # of csv's row
-nrow(df)
-
-# add anti_time row for BOOM 
-df[nrow(df),] <- c(99,"2020-10-06T01:41",BOOM)
-df <- df <- df[with(df, order(time)), ]
-head(df, 20)
 
 # add status column for coloring each event 
 df$status <- "installed_program"
 df <- df[with(df, order(time)), ] 	# could be different for each csv 
 head(df, 20)
 
+
+# add anti_time row for BOOM
+df[nrow(df)+1, ] <- c(99,"2020-10-06T01:41","BOOM","BOOM")
+df <- df[with(df, order(time)), ]
+head(df,20)
+
+
 # define colors for each event 
-status_levels <- c("timeline", "installed_program", "search_terms", "BOOM")
-status_colors <- c("#0070C0", "#00B050","FFC000", "#C00000" )
+status_levels <- c("timeline", "installed_program", "search_terms","BOOM")
+status_colors <- c("#0070C0", "#00B050","#FFC000", "#C00000")
 
 df$status <- factor(df$status, levels=status_levels, ordered=TRUE)
 
@@ -68,55 +64,43 @@ minute_format <- format(hour_minute_range, '%H:%M')
 hour_df <-data.frame(hour_minute_range, minute_format)
 hour_df
 
-
-################################### modified
 typeof(hour_df)
-test <- unlist(hour_df)
-typeof(test)
+class(hour_df)
 
-typeof(hour_df)
+
+
+################################### modified hour_df type changed list -> unlist
+
+#typeof(hour_df)
 hour_df <- unlist(hour_df)
 
-typeof(hour_df)
-
-#day_hour_range <- seq( ymd_hm(min(df$time)) - hours(minute_buffer), ymd_hm(max(df$time)) + hours(minute_buffer), by='hour')
-#day_hour_range <- as.Date(
-#  intersect(
-#    ceiling_date(day_hour_range, unit="day"),
-#    floor_date(day_hour_range, unit="day")
-#    ), origin = "1970-01-01"
-#)
-
-#day_format <- format(day_hour_range, '%m-%d')
-#day_df <- data.frame(day_hour_range, day_format)
-
+#################################3
 
 
 #### PLOT ####
 
-
-
-
-## ++++ modified y value 0 -> position
-timeline_plot <- ggplot(df, aes(x=time, y=position, col=status, label = task)) # what data you use
-timeline_plot <- timeline_plot + labs(col ="Artifacts")   # Add the legend
-
-# assing the colors 
+timeline_plot <- ggplot(df, aes(x=time, y=0, col=status, label = task)) # what data you use
+timeline_plot <- timeline_plot + labs(col ="Artifacts")
 timeline_plot <- timeline_plot +scale_color_manual(values=status_colors, labels=status_levels, drop = FALSE)
-
-# use the classic theme to remove backgrond gray
 timeline_plot <- timeline_plot + theme_classic()
 
 # Plot horizontal black line for timeline
 timeline_plot <- timeline_plot + geom_hline(yintercept = 0, color = "black", size=0.3)
 
 
+print(timeline_plot)
+
+# Plot Title name
+timeline_plot <- timeline_plot + ggtitle("Timeline for Aniforensic Event +- 30 min")    # title 명칭을 입력합니다.
+timeline_plot <- timeline_plot + theme(plot.title = element_text(family = "sans-serif", face = "bold", hjust = 0.5, size = 15, color = "darkblue"))
+
+print(timeline_plot)
+
 # Plot vertical segment lines for milestones
 timeline_plot <- timeline_plot + geom_segment(data=df[df$time_count == 1,], aes(y=position, yend=0, xend=time),
                                               color = 'black', size=0.2)
 
-# Plot the center antiforensic event time
-
+print(timeline_plot)
 
 # Plot scatter points at zero and date
 timeline_plot<- timeline_plot + geom_point(aes(y=0), size =3)           # use point 
@@ -129,23 +113,16 @@ timeline_plot <- timeline_plot + theme(axis.line.y=element_blank(),
                                        axis.title.x=element_blank(),
                                        axis.title.y=element_blank(),
                                        axis.ticks.y=element_blank(),
-                                       axis.text.x=element_blank(),
+                                       #axis.text.x=element_blank(),
                                        axis.ticks.x=element_blank(),
                                        axis.line.x=element_blank(),
                                        legend.position = "bottom"
-                                       )
+)
 
 print(timeline_plot)
 
-#Show text for each minute
-timeline_plot <- timeline_plot + geom_text(data=hour_df, 
-                                           aes(x=hour_minute_range,
-                                               y=-0.1,
-                                               label = minute_format),
-                                           size=2.5,
-                                           vjust=0.5, 
-                                           color ='black',
-                                           angle=90)
+# Show text for each milestone
+timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=2.5)
 
 
-
+print(timeline_plot)
