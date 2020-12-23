@@ -13,12 +13,10 @@ library(lubridate)
 df <- read.csv('C:/Users/305/Desktop/R/csv/3_installedprogram.csv', encoding = 'UTF-8')
 df
 
-
 # add status column for coloring each event 
 df$status <- "installed_program"
 df <- df[with(df, order(time)), ] 	# could be different for each csv 
 head(df, 20)
-
 
 # add anti_time row for BOOM
 df[nrow(df)+1, ] <- c(99,"2020-10-06T01:41","BOOM","BOOM")
@@ -46,8 +44,7 @@ line_pos <- data.frame(
 
 df <- merge(x=df, y=line_pos, by="time",all= TRUE)
 df <- df[with(df, order(time, status)), ]
-
-head(df, 20)
+head(df,20)
 
 # multiple tasks for a minute, slightly alter their positions higher or lower
 
@@ -92,7 +89,8 @@ print(timeline_plot)
 
 # Plot Title name
 timeline_plot <- timeline_plot + ggtitle("Timeline for Aniforensic Event +- 30 min")    # title 명칭을 입력합니다.
-timeline_plot <- timeline_plot + theme(plot.title = element_text(family = "sans-serif", face = "bold", hjust = 0.5, size = 15, color = "darkblue"))
+#timeline_plot <- timeline_plot + theme(plot.title = element_text(family = "sans-serif", face = "bold", hjust = 0.5, size = 15, color = "darkblue"))
+timeline_plot <- timeline_plot + theme(plot.title = element_text( face = "bold", hjust = 0.5, size = 15, color = "darkblue"))
 
 print(timeline_plot)
 
@@ -126,3 +124,4 @@ timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size
 
 
 print(timeline_plot)
+
