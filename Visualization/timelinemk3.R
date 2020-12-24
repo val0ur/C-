@@ -57,8 +57,6 @@ df$time_count <- ave(df$time==df$time, df$time, FUN=cumsum)
 df$text_position <- (df$time_count * text_offset * df$direction) + df$position
 head(df,20)
 
-hour_df <- unlist(hour_df)
-
 # Draw Timeline Graph
 timeline_plot <- ggplot(df, aes(x=time, y=0, col=status, label = task)) # what data you use
 timeline_plot <- timeline_plot + labs(col ="Artifacts")
@@ -94,5 +92,5 @@ timeline_plot <- timeline_plot + theme(axis.line.y=element_blank(),
 timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=2.5)
 
 print(timeline_plot)
-ggsave("result.png", width =20, height=10.5)
+ggsave("Timeline.png", width =20, height=10.5)
        
