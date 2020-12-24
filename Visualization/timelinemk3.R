@@ -1,4 +1,4 @@
-# Timeline graphic using R and ggplot2
+# Timeline graphic using R 
 
 #install.packages("ggplot2")
 #install.packages("scales")
