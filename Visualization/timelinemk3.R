@@ -91,6 +91,7 @@ timeline_plot <- timeline_plot + theme(axis.line.y=element_blank(),
 # Show text for each task | font size 
 timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=2.5)
 
+# Print and Save Graph
 print(timeline_plot)
 ggsave("Timeline.png", width =20, height=10.5)
        
