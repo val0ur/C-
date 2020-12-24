@@ -94,3 +94,5 @@ timeline_plot <- timeline_plot + theme(axis.line.y=element_blank(),
 timeline_plot <- timeline_plot + geom_text(aes(y=text_position,label=task), size=2.5)
 
 print(timeline_plot)
+ggsave("result.png", width =20, height=10.5)
+       
