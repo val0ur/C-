@@ -1,5 +1,5 @@
 [디지털 포렌식 개론 중간 대체 과제] 
-2020       서동조 
+2020010676 서동조 
 2020021524 윤승기 
 
 Standalone 버전의 결과 DB 파일을 활용하여 시각화
@@ -12,6 +12,7 @@ Standalone 버전의 결과 DB 파일을 활용하여 시각화
 3. 시각화 기능 구현 - 오픈소스 시각화 API_윤승기
 
 -----------------------------------------------------------------
+1. IDEA
 
 Main idea
 특정 이벤트(antiforesnsic)가 발생했을 때 해당 이벤트 전 후 1시간 동안의 아티팩트들을 시각화
@@ -28,8 +29,34 @@ chrome_search_terms 	- Most used Browser
 installed_program 		- Download Programs
 
 -----------------------------------------------------------------
-동조 part
+2. DB part
+
+Language : C#
+C#을 활용하여 개발하였고 DB 정보를 활용하기 위해 SQLite 라이브러리 활용
+
+Summary
+antiforensic 로그가 발생한 시각을 기점으로 앞뒤 30분의 주요 로그를 조회
+
+조회하는 테이블은 윈도우 타임라인, 검색 기록, 설치한 프로그램이며 
+검색 기록은 크롬 브라우저에서 검색한 데이터만 가져오지만 테이블만 추가하면 수집된 다른 브라우저 로그도 가져올 수 있다.
+
+Details
+
+lv1_os_win_event_logs_antiforensics 테이블을 조회하여 이벤트 명과 발생 시각을 가져온다.
+
+가져온 각 row에 대한 발생 시각을 가지고 발생 30분 전, 30분 후를 계산하여 
+v1_os_win_windows_timeline, lv1_os_win_reg_installed_program, lv1_app_web_chrome_search_terms 테이블에서 
+해당 시간 범위 내에 있는 로그들을 가져온다.
+
+각 테이블에서 가져오는 데이터는 program_name, program_name, search_term과 그에 대한 발생 시각이다.
+이 데이터를 시각화 부분에서 활용하기 위해 csv 파일로 저장하는데, n번째 antiforensic 데이터에 대한 파일 명은 다음과 같다.
+
+ - n_timeline.csv
+ - n_installedprogram.csv
+ - n_searchterms.csv
+
 -----------------------------------------------------------------
+3. VISUALIZATION part
 
 Language : C#, R 
 기본적으로 R을 이용해 시각화를 구현했고 전체 틀인 C#을 활용하기 위해 
