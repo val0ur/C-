@@ -30,7 +30,7 @@ df <- rbind(df1, df2, df3)
 # add anti_time row for BOOM | INPUT the anti_forensic_time as "YYYY-MM-DDThh:mm" form
 df[nrow(df)+1, ] <- c(99,"2020-10-06T01:41","BOOM","BOOM")
 df <- df[with(df, order(time)), ]
-head(df,20)
+head(df, 20)
 
 # define colors for each event 
 status_levels <- c("timeline", "installed_program", "search_terms","BOOM")
@@ -55,7 +55,7 @@ head(df, 20)
 text_offset <- 0.05
 df$time_count <- ave(df$time==df$time, df$time, FUN=cumsum)
 df$text_position <- (df$time_count * text_offset * df$direction) + df$position
-head(df,20)
+head(df, 20)
 
 # Draw Timeline Graph
 timeline_plot <- ggplot(df, aes(x=time, y=0, col=status, label = task)) # what data you use
