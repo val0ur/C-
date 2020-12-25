@@ -14,7 +14,7 @@ df1$status <- "installed_program"
 df1 <- df1[with(df1, order(time)), ]    
 head(df1, 20)
 
-df2 <- read.csv('C:/Users/305/Desktop/R/csv2/3_serachterms.csv', encoding = 'UTF-8')
+df2 <- read.csv('C:/Users/305/Desktop/R/csv2/3_searchterms.csv', encoding = 'UTF-8')
 df2$status <- "search_terms"
 df2 <- df2[with(df2, order(time)), ]   
 head(df2, 20)
